@@ -4,8 +4,8 @@ import { Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 function App() {
-	const BlueButton = styled(Button)(({ theme }) => ({
-		backgroundColor: theme.palette.otherColor.main,
+	const BlueButton = styled(Button)({
+		backgroundColor: 'skyblue',
 		color: '#888',
 		margin: 5,
 		'&:hover': {
@@ -15,11 +15,11 @@ function App() {
 			backgroundColor: 'gray',
 			color: 'white',
 		},
-	}));
+	});
 	return (
 		<div>
 			<Button variant='text'>Text</Button>
-			<Button startIcon={<Settings />} variant='contained' color='otherColor'>
+			<Button startIcon={<Settings />} variant='contained' color='secondary'>
 				Settings
 			</Button>
 			<Button startIcon={<Add />} variant='contained' color='success'>
