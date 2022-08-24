@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import Button from '@mui/material/Button';
+import { Add, Settings } from '@mui/icons-material';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const BlueButton = styled(Button)(({ theme }) => ({
+		backgroundColor: theme.palette.otherColor.main,
+		color: '#888',
+		margin: 5,
+		'&:hover': {
+			backgroundColor: 'lightBlue',
+		},
+		'&:disabled': {
+			backgroundColor: 'gray',
+			color: 'white',
+		},
+	}));
+	return (
+		<div>
+			<Button variant='text'>Text</Button>
+			<Button startIcon={<Settings />} variant='contained' color='otherColor'>
+				Settings
+			</Button>
+			<Button startIcon={<Add />} variant='contained' color='success'>
+				Add new post
+			</Button>
+			<Button variant='outlined'>Outlined</Button>
+			<Typography variant='h1'>It uses h1</Typography>
+			<BlueButton>One</BlueButton>
+			<BlueButton>Two</BlueButton>
+		</div>
+	);
 }
 
 export default App;
