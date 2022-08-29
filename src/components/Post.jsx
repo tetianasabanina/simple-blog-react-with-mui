@@ -11,15 +11,21 @@ import {
 	Typography,
 } from '@mui/material';
 import { MoreVert, Favorite, Share, FavoriteBorder } from '@mui/icons-material';
-// import image1 from '../fenix-main-image.JPG';
 
-const Post = () => {
+const Post = ({
+	postImage,
+	altImageText,
+	postTitle,
+	postAvatar,
+	postText,
+	subheader,
+}) => {
 	return (
 		<Card sx={{ margin: 5 }}>
 			<CardHeader
 				avatar={
 					<Avatar sx={{ bgcolor: 'red' }} aria-label='about'>
-						A
+						{postAvatar}
 					</Avatar>
 				}
 				action={
@@ -27,14 +33,14 @@ const Post = () => {
 						<MoreVert />
 					</IconButton>
 				}
-				title='AAAAAAA'
-				subheader='September 14, 2022'
+				title={postTitle}
+				subheader={subheader}
 			/>
 			<CardMedia
 				component='img'
 				height='20%'
-				image='https://www.flickr.com/photos/cseeman/43366442002'
-				alt='descriptive text'
+				image={postImage}
+				alt={altImageText}
 			/>
 			<CardContent>
 				<Typography
@@ -49,21 +55,7 @@ const Post = () => {
 					color='text.secondary'
 				>
 					{' '}
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-					volutpat ultrices erat et interdum. Curabitur ut tempor tellus. Mauris
-					sapien mauris, elementum id egestas sed, suscipit sed erat. Maecenas
-					congue, tellus vitae gravida finibus, quam magna gravida leo, quis
-					hendrerit urna nibh id purus. Morbi in lacus eu est efficitur
-					vestibulum. Duis placerat arcu tincidunt rhoncus maximus. Fusce a
-					dignissim nulla. Suspendisse ut volutpat mauris, pretium blandit
-					tortor. Aliquam erat volutpat. Cras ac erat ut nisl cursus pulvinar ac
-					sit amet arcu. Sed gravida mattis mollis. In vel porttitor enim. Fusce
-					pellentesque augue vel ornare auctor. Donec sit amet sapien malesuada,
-					commodo lorem at, fermentum nisl. Quisque in ultricies mi. Fusce
-					tristique euismod lectus, a sollicitudin magna molestie at. Fusce quam
-					ex, gravida at tempor non, mollis quis tortor. Vivamus venenatis
-					mattis porttitor. Nullam vitae ornare tortor, non maximus justo. Nunc
-					vitae tincidunt ligula.
+					{postText}
 				</Typography>
 			</CardContent>
 			<CardActions disableSpacing>
