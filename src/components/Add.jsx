@@ -39,7 +39,7 @@ const Add = () => {
 	return (
 		<>
 			<Tooltip
-				title='Add'
+				title='Add a new post'
 				sx={{
 					position: 'fixed',
 					bottom: 20,
@@ -47,7 +47,7 @@ const Add = () => {
 				}}
 				onClick={(e) => setOpen(true)}
 			>
-				<Fab color='primary' aria-label='add'>
+				<Fab color='secondary' aria-label='add'>
 					<AddIcon />
 				</Fab>
 			</Tooltip>
