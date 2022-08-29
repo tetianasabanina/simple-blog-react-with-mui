@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FlutterDash } from '@mui/icons-material';
+import { FlutterDash, ModeNight } from '@mui/icons-material';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import MenuIcon from '@mui/icons-material/Menu';
 import {
 	AppBar,
 	InputBase,
@@ -14,6 +14,9 @@ import {
 	Box,
 	Menu,
 	MenuItem,
+	IconButton,
+	ListItemIcon,
+	Switch,
 } from '@mui/material';
 
 const StyledToolBar = styled(Toolbar)({
@@ -46,8 +49,10 @@ const Icons = styled(Box)(({ theme }) => ({
 	},
 }));
 
-const Navbar = () => {
-	const [open, setOpen] = useState(false);
+const Navbar = ({ mode, setMode }) => {
+	const [openUserMenu, setOpenUserMenu] = useState(false);
+	const [openMainMenu, setOpenMainMenu] = useState(false);
+
 	return (
 		<AppBar position='sticky'>
 			<StyledToolBar>
@@ -55,6 +60,42 @@ const Navbar = () => {
 					My Blog
 				</Typography>
 				<FlutterDash sx={{ display: { xs: 'block', sm: 'none' } }} />
+				<IconButton
+					onClick={(e) => setOpenMainMenu(true)}
+					size='large'
+					edge='start'
+					color='inherit'
+					aria-label='menu'
+					sx={{ mr: 2, display: { xs: 'block', sm: 'none' } }}
+				>
+					<MenuIcon />
+				</IconButton>
+				<Menu
+					id='main-menu'
+					aria-labelledby='main-menu'
+					open={openMainMenu}
+					onClose={(e) => setOpenMainMenu(false)}
+					anchorOrigin={{
+						vertical: 'top',
+						horizontal: 'left',
+					}}
+					transformOrigin={{
+						vertical: 'top',
+						horizontal: 'left',
+					}}
+				>
+					<MenuItem>Homepage</MenuItem>
+					<MenuItem>Settings</MenuItem>
+					<MenuItem>Profile</MenuItem>
+					<MenuItem>
+						<ListItemIcon>
+							<ModeNight fontSize='small' />
+						</ListItemIcon>
+						<Switch
+							onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
+						/>
+					</MenuItem>
+				</Menu>
 				<Search>
 					<InputBase placeholder='search...' />
 				</Search>
@@ -68,10 +109,10 @@ const Navbar = () => {
 					<Avatar
 						sx={{ width: 30, height: 30 }}
 						src=''
-						onClick={(e) => setOpen(true)}
+						onClick={(e) => setOpenUserMenu(true)}
 					/>
 				</Icons>
-				<UserBox onClick={(e) => setOpen(true)}>
+				<UserBox onClick={(e) => setOpenUserMenu(true)}>
 					<Avatar sx={{ width: 30, height: 30 }} src='' />
 					<Typography variant='span'>User</Typography>
 				</UserBox>
@@ -79,8 +120,8 @@ const Navbar = () => {
 			<Menu
 				id='demo-positioned-menu'
 				aria-labelledby='demo-positioned-button'
-				open={open}
-				onClose={(e) => setOpen(false)}
+				open={openUserMenu}
+				onClose={(e) => setOpenUserMenu(false)}
 				anchorOrigin={{
 					vertical: 'top',
 					horizontal: 'right',
