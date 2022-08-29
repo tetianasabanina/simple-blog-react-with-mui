@@ -9,11 +9,13 @@ import Sidebar from './components/Sidebar';
 import Footer from './components/Footer';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
-import Nav from './components/Nav';
 import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
 	const [mode, setMode] = useState('light');
+	const [isLoggedIn, setLogged] = useState(true);
+	const setLoggedIn = () => setLogged(true);
+	const setLoggedOut = () => setLogged(false);
 
 	const darkTheme = createTheme({
 		palette: {
@@ -24,28 +26,28 @@ function App() {
 		<>
 			<ThemeProvider theme={darkTheme}>
 				<Box bgcolor={'background.default'} color={'text.primary'}>
-					<Navbar setMode={setMode} mode={mode} />
+					<Navbar
+						setMode={setMode}
+						mode={mode}
+						isLoggedIn={isLoggedIn}
+						setLoggedOut={setLoggedOut}
+						setLoggedIn={setLoggedIn}
+					/>
 					<Stack direction='row' spacing={2} justifyContent='space-between'>
-						<Sidebar setMode={setMode} mode={mode} />
+						<Sidebar setMode={setMode} mode={mode} isLoggedIn={isLoggedIn} />
 						<Routes>
-							{/* <Route
-								path='/'
-								element={<Nav />}
-							> */}
 							<Route path='/' element={<Feed />} />
 							<Route path='/settings' element={<Settings />} />
 							<Route
 								path='/profile'
 								element={
-									<PrivateRoute>
+									<PrivateRoute isLoggedIn={isLoggedIn}>
 										<Profile />
 									</PrivateRoute>
 								}
 							/>
-							{/* </Route> */}
 							<Route path='*' element={'404 page not found'} />
 						</Routes>
-						{/* <Feed /> */}
 						<Rightbar />
 					</Stack>
 					<Add />

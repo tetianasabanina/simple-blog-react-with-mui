@@ -19,6 +19,7 @@ import {
 	IconButton,
 	ListItemIcon,
 	Switch,
+	Button,
 } from '@mui/material';
 
 const StyledToolBar = styled(Toolbar)({
@@ -51,10 +52,13 @@ const Icons = styled(Box)(({ theme }) => ({
 	},
 }));
 
-const Navbar = ({ mode, setMode }) => {
+const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 	const [openUserMenu, setOpenUserMenu] = useState(false);
 	const [openMainMenu, setOpenMainMenu] = useState(false);
-
+	const logout = () => {
+		setLoggedOut();
+		setOpenUserMenu(false);
+	};
 	return (
 		<AppBar position='sticky'>
 			<StyledToolBar>
@@ -92,9 +96,11 @@ const Navbar = ({ mode, setMode }) => {
 					<MenuItem>
 						<Link to={'/settings'}>Settings</Link>
 					</MenuItem>
-					<MenuItem>
-						<Link to={'/profile'}>Profile</Link>
-					</MenuItem>
+					{isLoggedIn && (
+						<MenuItem>
+							<Link to={'/profile'}>Profile</Link>
+						</MenuItem>
+					)}
 					<MenuItem>
 						<ListItemIcon>
 							<ModeNight fontSize='small' />
@@ -108,23 +114,31 @@ const Navbar = ({ mode, setMode }) => {
 				<Search>
 					<InputBase placeholder='search...' />
 				</Search>
-				<Icons>
-					<Badge badgeContent={4} color='error'>
-						<MailIcon />
-					</Badge>
-					<Badge badgeContent={2} color='error'>
-						<NotificationsIcon />
-					</Badge>
-					<Avatar
-						sx={{ width: 30, height: 30 }}
-						src=''
-						onClick={(e) => setOpenUserMenu(true)}
-					/>
-				</Icons>
-				<UserBox onClick={(e) => setOpenUserMenu(true)}>
-					<Avatar sx={{ width: 30, height: 30 }} src='' />
-					<Typography variant='span'>User</Typography>
-				</UserBox>
+				{isLoggedIn ? (
+					<>
+						<Icons>
+							<Badge badgeContent={4} color='error'>
+								<MailIcon />
+							</Badge>
+							<Badge badgeContent={2} color='error'>
+								<NotificationsIcon />
+							</Badge>
+							<Avatar
+								sx={{ width: 30, height: 30 }}
+								src=''
+								onClick={(e) => setOpenUserMenu(true)}
+							/>
+						</Icons>
+						<UserBox onClick={(e) => setOpenUserMenu(true)}>
+							<Avatar sx={{ width: 30, height: 30 }} src='' />
+							<Typography variant='span'>User</Typography>
+						</UserBox>
+					</>
+				) : (
+					<Button onClick={setLoggedIn} variant='contained' color='secondary'>
+						Login
+					</Button>
+				)}
 			</StyledToolBar>
 			<Menu
 				id='demo-positioned-menu'
@@ -143,8 +157,9 @@ const Navbar = ({ mode, setMode }) => {
 				<MenuItem>
 					<Link to={'/profile'}>Profile</Link>
 				</MenuItem>
+
 				<MenuItem>My account</MenuItem>
-				<MenuItem>Logout</MenuItem>
+				<MenuItem onClick={logout}>Logout</MenuItem>
 			</Menu>
 		</AppBar>
 	);

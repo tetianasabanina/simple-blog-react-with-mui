@@ -10,7 +10,7 @@ import {
 import { Home, Settings, AccountBox, ModeNight } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
-const Sidebar = ({ mode, setMode }) => {
+const Sidebar = ({ mode, setMode, isLoggedIn }) => {
 	return (
 		<Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
 			<Box position='fixed'>
@@ -35,25 +35,28 @@ const Sidebar = ({ mode, setMode }) => {
 							</Link>
 						</ListItemButton>
 					</ListItem>
-					<ListItem disablePadding>
-						<ListItemButton component='a' href='#simple-list'>
-							<ListItemIcon>
-								<AccountBox />
-							</ListItemIcon>
-							<Link to={'/profile'}>
-								<ListItemText primary='Profile' />
-							</Link>
-						</ListItemButton>
-					</ListItem>
-					<ListItem disablePadding>
-						<ListItemButton component='a' href='#home'>
+					{isLoggedIn && (
+						<ListItem disablePadding>
+							<ListItemButton component='a' href='#profile'>
+								<ListItemIcon>
+									<AccountBox />
+								</ListItemIcon>
+								<Link to={'/profile'}>
+									<ListItemText primary='Profile' />
+								</Link>
+							</ListItemButton>
+						</ListItem>
+					)}
+
+					<ListItem>
+						<>
 							<ListItemIcon>
 								<ModeNight />
 							</ListItemIcon>
 							<Switch
 								onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
 							/>
-						</ListItemButton>
+						</>
 					</ListItem>
 				</List>
 			</Box>
