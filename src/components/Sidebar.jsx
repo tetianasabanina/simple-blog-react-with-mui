@@ -9,8 +9,6 @@ import {
 } from '@mui/material';
 import { Home, Settings, AccountBox, ModeNight } from '@mui/icons-material';
 
-import React from 'react';
-
 const Sidebar = ({ mode, setMode }) => {
 	return (
 		<Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>

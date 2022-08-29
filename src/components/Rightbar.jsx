@@ -1,3 +1,4 @@
+import React from 'react';
 import {
 	Avatar,
 	AvatarGroup,
@@ -11,7 +12,6 @@ import {
 	List,
 	ListItem,
 } from '@mui/material';
-import React from 'react';
 
 const itemData = [
 	{

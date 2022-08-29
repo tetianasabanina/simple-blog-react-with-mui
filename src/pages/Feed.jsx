@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 
-import React from 'react';
-import Post from './Post';
+import Post from '../components/Post';
 import image1 from '../images/peippo.jpg';
 import image2 from '../images/crocus-tm-mix.jpg';
 
