@@ -28,18 +28,21 @@ function App() {
 					<Stack direction='row' spacing={2} justifyContent='space-between'>
 						<Sidebar setMode={setMode} mode={mode} />
 						<Routes>
-							<Route path='/' element={<Nav />}>
-								<Route path='/' element={<Feed />} />
-								<Route path='settings' element={<Settings />} />
-								<Route
-									path='profile'
-									element={
-										<PrivateRoute>
-											<Profile />
-										</PrivateRoute>
-									}
-								/>
-							</Route>
+							{/* <Route
+								path='/'
+								element={<Nav />}
+							> */}
+							<Route path='/' element={<Feed />} />
+							<Route path='/settings' element={<Settings />} />
+							<Route
+								path='/profile'
+								element={
+									<PrivateRoute>
+										<Profile />
+									</PrivateRoute>
+								}
+							/>
+							{/* </Route> */}
 							<Route path='*' element={'404 page not found'} />
 						</Routes>
 						{/* <Feed /> */}

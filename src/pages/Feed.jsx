@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 
 import Post from '../components/Post';
-import image1 from '../images/peippo.jpg';
+import image1 from '../images/peippo1.jpg';
 import image2 from '../images/crocus-tm-mix.jpg';
 
 const Feed = () => {

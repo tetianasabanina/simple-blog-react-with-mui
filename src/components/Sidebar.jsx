@@ -8,6 +8,7 @@ import {
 	Switch,
 } from '@mui/material';
 import { Home, Settings, AccountBox, ModeNight } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ mode, setMode }) => {
 	return (
@@ -19,7 +20,9 @@ const Sidebar = ({ mode, setMode }) => {
 							<ListItemIcon>
 								<Home />
 							</ListItemIcon>
-							<ListItemText primary='Homepage' />
+							<Link to={'/'}>
+								<ListItemText primary='Homepage' />
+							</Link>
 						</ListItemButton>
 					</ListItem>
 					<ListItem disablePadding>
@@ -27,7 +30,9 @@ const Sidebar = ({ mode, setMode }) => {
 							<ListItemIcon>
 								<Settings />
 							</ListItemIcon>
-							<ListItemText primary='Settings' />
+							<Link to={'/settings'}>
+								<ListItemText primary='Settings' />
+							</Link>
 						</ListItemButton>
 					</ListItem>
 					<ListItem disablePadding>
@@ -35,7 +40,9 @@ const Sidebar = ({ mode, setMode }) => {
 							<ListItemIcon>
 								<AccountBox />
 							</ListItemIcon>
-							<ListItemText primary='Profile' />
+							<Link to={'/profile'}>
+								<ListItemText primary='Profile' />
+							</Link>
 						</ListItemButton>
 					</ListItem>
 					<ListItem disablePadding>

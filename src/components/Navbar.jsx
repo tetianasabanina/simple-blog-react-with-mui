@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { FlutterDash, ModeNight } from '@mui/icons-material';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -84,9 +86,15 @@ const Navbar = ({ mode, setMode }) => {
 						horizontal: 'left',
 					}}
 				>
-					<MenuItem>Homepage</MenuItem>
-					<MenuItem>Settings</MenuItem>
-					<MenuItem>Profile</MenuItem>
+					<MenuItem>
+						<Link to={'/'}>Home</Link>
+					</MenuItem>
+					<MenuItem>
+						<Link to={'/settings'}>Settings</Link>
+					</MenuItem>
+					<MenuItem>
+						<Link to={'/profile'}>Profile</Link>
+					</MenuItem>
 					<MenuItem>
 						<ListItemIcon>
 							<ModeNight fontSize='small' />
@@ -96,6 +104,7 @@ const Navbar = ({ mode, setMode }) => {
 						/>
 					</MenuItem>
 				</Menu>
+				{/* <Outlet /> */}
 				<Search>
 					<InputBase placeholder='search...' />
 				</Search>
@@ -131,7 +140,9 @@ const Navbar = ({ mode, setMode }) => {
 					horizontal: 'right',
 				}}
 			>
-				<MenuItem>Profile</MenuItem>
+				<MenuItem>
+					<Link to={'/profile'}>Profile</Link>
+				</MenuItem>
 				<MenuItem>My account</MenuItem>
 				<MenuItem>Logout</MenuItem>
 			</Menu>
