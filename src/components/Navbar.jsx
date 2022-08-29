@@ -52,7 +52,7 @@ const Navbar = () => {
 		<AppBar position='sticky'>
 			<StyledToolBar>
 				<Typography variant='h6' sx={{ display: { xs: 'none', sm: 'block' } }}>
-					Fenix
+					My Blog
 				</Typography>
 				<FlutterDash sx={{ display: { xs: 'block', sm: 'none' } }} />
 				<Search>
