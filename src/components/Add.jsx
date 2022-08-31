@@ -42,7 +42,9 @@ const Add = () => {
 				title='Add a new post'
 				sx={{
 					position: 'fixed',
-					bottom: 100,
+					position: '-webkit - sticky',
+					position: 'sticky',
+					bottom: 30,
 					left: { xs: 'calc(50% - 25px)', md: 30 },
 				}}
 				onClick={(e) => setOpen(true)}
@@ -61,7 +63,7 @@ const Add = () => {
 					width={400}
 					height={280}
 					bgcolor={'background.default'}
-					color={'text.promary'}
+					color={'text.primary'}
 					borderRadius={5}
 					padding={3}
 				>

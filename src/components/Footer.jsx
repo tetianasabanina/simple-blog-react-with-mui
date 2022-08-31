@@ -8,7 +8,7 @@ const StyledToolBar = styled(Toolbar)({
 });
 const Footer = () => {
 	return (
-		<Box>
+		<Box mt={3}>
 			<AppBar color='primary' sx={{ top: 'auto', bottom: 0 }} position='float'>
 				<StyledToolBar>
 					<Contacts />
