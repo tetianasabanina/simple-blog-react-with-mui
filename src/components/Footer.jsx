@@ -1,19 +1,18 @@
-import { Box, Toolbar, Typography, styled, AppBar } from '@mui/material';
-import React from 'react';
+import { Box, Toolbar, styled, AppBar } from '@mui/material';
+import Contacts from './Contacts';
+import Map from './Map';
 
-const StyledToolBar = styled(Toolbar)(({ theme }) => ({
+const StyledToolBar = styled(Toolbar)({
 	display: 'flex',
 	justifyContent: 'space-between',
-	// backgroundColor: 'background.default',
-	// color: 'text.primary',
-}));
+});
 const Footer = () => {
 	return (
 		<Box>
 			<AppBar color='primary' sx={{ top: 'auto', bottom: 0 }} position='float'>
 				<StyledToolBar>
-					<Typography variant='h5'>Contacts</Typography>
-					<Typography variant='h5'>About</Typography>
+					<Contacts />
+					<Map />
 				</StyledToolBar>
 			</AppBar>
 		</Box>

@@ -52,7 +52,7 @@ function App() {
 					</Stack>
 					<Add />
 				</Box>
-				<Footer bgcolor={'background.default'} color={'text.primary'} />
+				<Footer />
 			</ThemeProvider>
 		</>
 	);
