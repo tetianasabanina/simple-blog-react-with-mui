@@ -32,7 +32,7 @@ const StyledListItem = styled(ListItem)({
 
 const Contacts = () => {
 	return (
-		<Box>
+		<Box flex={4} m='auto'>
 			<List>
 				<StyledListItem>
 					<ListItemIcon sx={{ color: 'white' }}>

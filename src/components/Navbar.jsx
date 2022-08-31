@@ -62,17 +62,17 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 	return (
 		<AppBar position='sticky'>
 			<StyledToolBar>
-				<Typography variant='h6' sx={{ display: { xs: 'none', sm: 'block' } }}>
+				<Typography variant='h6' sx={{ display: { xs: 'none', md: 'block' } }}>
 					My Blog
 				</Typography>
-				<FlutterDash sx={{ display: { xs: 'block', sm: 'none' } }} />
+				<FlutterDash sx={{ display: { xs: 'block', md: 'none' } }} />
 				<IconButton
 					onClick={(e) => setOpenMainMenu(true)}
 					size='large'
 					edge='start'
 					color='inherit'
 					aria-label='menu'
-					sx={{ mr: 2, display: { xs: 'block', sm: 'none' } }}
+					sx={{ mr: 2, display: { xs: 'block', md: 'none' } }}
 				>
 					<MenuIcon />
 				</IconButton>
