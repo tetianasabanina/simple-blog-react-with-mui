@@ -1,5 +1,17 @@
-import { Box, List, ListItem, ListItemIcon, Switch } from '@mui/material';
-import { Home, Settings, AccountBox, ModeNight } from '@mui/icons-material';
+import {
+	Box,
+	List,
+	ListItem,
+	ListItemIcon,
+	Switch,
+	Tooltip,
+} from '@mui/material';
+import {
+	Home,
+	Settings,
+	AccountBox,
+	SettingsBrightness,
+} from '@mui/icons-material';
 
 import ListItemLink from './ListItemLink';
 
@@ -28,16 +40,16 @@ const Sidebar = ({ mode, setMode, isLoggedIn }) => {
 							icon={<AccountBox />}
 						/>
 					)}
-					<ListItem>
-						<>
+					<Tooltip title={mode === 'dark' ? 'Light mode' : 'Dark Mode'}>
+						<ListItem>
 							<ListItemIcon>
-								<ModeNight />
+								<SettingsBrightness />
 							</ListItemIcon>
 							<Switch
 								onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
 							/>
-						</>
-					</ListItem>
+						</ListItem>
+					</Tooltip>
 				</List>
 			</Box>
 		</Box>

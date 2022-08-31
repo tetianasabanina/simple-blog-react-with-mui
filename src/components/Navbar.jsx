@@ -20,6 +20,7 @@ import {
 	ListItemIcon,
 	Switch,
 	Button,
+	Tooltip,
 } from '@mui/material';
 
 const StyledToolBar = styled(Toolbar)({
@@ -59,6 +60,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 		setLoggedOut();
 		setOpenUserMenu(false);
 	};
+
 	return (
 		<AppBar position='sticky'>
 			<StyledToolBar>
@@ -90,25 +92,27 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 						horizontal: 'left',
 					}}
 				>
-					<MenuItem>
-						<Link to={'/'}>Home</Link>
+					<MenuItem component={Link} to={'/'}>
+						Home
 					</MenuItem>
-					<MenuItem>
-						<Link to={'/settings'}>Settings</Link>
+					<MenuItem component={Link} to={'/settings'}>
+						Settings
 					</MenuItem>
 					{isLoggedIn && (
-						<MenuItem>
-							<Link to={'/profile'}>Profile</Link>
+						<MenuItem component={Link} to={'/profile'}>
+							Profile
 						</MenuItem>
 					)}
-					<MenuItem>
-						<ListItemIcon>
-							<ModeNight fontSize='small' />
-						</ListItemIcon>
-						<Switch
-							onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
-						/>
-					</MenuItem>
+					<Tooltip title={mode === 'dark' ? 'Light mode' : 'Dark Mode'}>
+						<MenuItem>
+							<ListItemIcon>
+								<ModeNight fontSize='small' />
+							</ListItemIcon>
+							<Switch
+								onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
+							/>
+						</MenuItem>
+					</Tooltip>
 				</Menu>
 				{/* <Outlet /> */}
 				<Search>
@@ -154,8 +158,8 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 					horizontal: 'right',
 				}}
 			>
-				<MenuItem>
-					<Link to={'/profile'}>Profile</Link>
+				<MenuItem component={Link} to={'/profile'} color='inherit'>
+					Profile
 				</MenuItem>
 
 				<MenuItem>My account</MenuItem>
