@@ -62,7 +62,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 	};
 
 	return (
-		<AppBar position='sticky'>
+		<AppBar position='sticky' color='primaryLight'>
 			<StyledToolBar>
 				<Typography variant='h6' sx={{ display: { xs: 'none', md: 'block' } }}>
 					My Blog

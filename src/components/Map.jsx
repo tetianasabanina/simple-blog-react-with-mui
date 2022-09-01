@@ -4,7 +4,9 @@ import React from 'react';
 const Map = () => {
 	return (
 		<Box flex={7} mb='auto' justifyContent={'center'} alignSelf={'center'}>
-			<Typography variant='h6'>Map</Typography>
+			<Typography sx={{ color: 'white' }} variant='h6'>
+				Map
+			</Typography>
 		</Box>
 	);
 };

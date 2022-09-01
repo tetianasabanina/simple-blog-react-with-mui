@@ -20,8 +20,24 @@ function App() {
 	const darkTheme = createTheme({
 		palette: {
 			mode: mode,
+			primary: {
+				main: '#7986cb',
+			},
+			secondary: {
+				main: '#af52d5',
+			},
+			primaryLight: {
+				main: '#7986cb',
+			},
+			primaryDark: {
+				main: '#26418f',
+			},
+			secondaryDark: {
+				main: '#4a0073',
+			},
 		},
 	});
+
 	return (
 		<>
 			<ThemeProvider theme={darkTheme}>
@@ -51,8 +67,8 @@ function App() {
 						<Rightbar />
 					</Stack>
 					<Add />
+					<Footer />
 				</Box>
-				<Footer />
 			</ThemeProvider>
 		</>
 	);

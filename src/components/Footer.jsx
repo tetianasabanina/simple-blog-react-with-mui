@@ -5,7 +5,11 @@ import Map from './Map';
 const Footer = () => {
 	return (
 		<Box mt={3}>
-			<AppBar color='primary' sx={{ top: 'auto', bottom: 0 }} position='float'>
+			<AppBar
+				color='primaryDark'
+				sx={{ top: 'auto', bottom: 0 }}
+				position='float'
+			>
 				<Stack
 					direction={{ xs: 'column', sm: 'row' }}
 					spacing={{ xs: 1, sm: 2, md: 4 }}

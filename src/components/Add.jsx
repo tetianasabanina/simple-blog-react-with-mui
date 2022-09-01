@@ -44,7 +44,7 @@ const Add = () => {
 					position: 'fixed',
 					position: '-webkit - sticky',
 					position: 'sticky',
-					bottom: 30,
+					bottom: '5rem',
 					left: { xs: 'calc(50% - 25px)', md: 30 },
 				}}
 				onClick={(e) => setOpen(true)}

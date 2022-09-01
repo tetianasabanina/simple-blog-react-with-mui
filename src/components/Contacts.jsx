@@ -38,19 +38,25 @@ const Contacts = () => {
 					<ListItemIcon sx={{ color: 'white' }}>
 						<Phone />
 					</ListItemIcon>
-					<ListItemText primary={details.phoneNumber1} />
+					<ListItemText
+						sx={{ color: 'white' }}
+						primary={details.phoneNumber1}
+					/>
 				</StyledListItem>
 				<StyledListItem disablePadding>
 					<ListItemIcon sx={{ color: 'white' }}>
 						<Phone />
 					</ListItemIcon>
-					<ListItemText primary={details.phoneNumber2} />
+					<ListItemText
+						sx={{ color: 'white' }}
+						primary={details.phoneNumber2}
+					/>
 				</StyledListItem>
 				<StyledListItem disablePadding>
 					<ListItemIcon sx={{ color: 'white' }}>
 						<Home />
 					</ListItemIcon>
-					<ListItemText>{details.address}</ListItemText>
+					<ListItemText sx={{ color: 'white' }}>{details.address}</ListItemText>
 				</StyledListItem>
 				<StyledListItem disablePadding>
 					<Link
