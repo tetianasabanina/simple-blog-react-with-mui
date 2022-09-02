@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import PrivateRoute from './pages/PrivateRoute';
+import ScrollToTop from './HOC/ScrollToTop';
 
 function App() {
 	const [mode, setMode] = useState('light');
@@ -51,6 +52,8 @@ function App() {
 					/>
 					<Stack direction='row' spacing={2} justifyContent='space-between'>
 						<Sidebar setMode={setMode} mode={mode} isLoggedIn={isLoggedIn} />
+						<ScrollToTop />
+
 						<Routes>
 							<Route path='/' element={<Feed />} />
 							<Route path='/settings' element={<Settings />} />
