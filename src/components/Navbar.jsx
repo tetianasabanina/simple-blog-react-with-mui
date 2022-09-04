@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import { FlutterDash, ModeNight } from '@mui/icons-material';
+import MaterialUISwitch from './MaterialUiSwitch';
+import { FlutterDash } from '@mui/icons-material';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -17,10 +17,7 @@ import {
 	Menu,
 	MenuItem,
 	IconButton,
-	ListItemIcon,
-	Switch,
 	Button,
-	Tooltip,
 } from '@mui/material';
 
 const StyledToolBar = styled(Toolbar)({
@@ -62,7 +59,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 	};
 
 	return (
-		<AppBar position='sticky' color='primaryLight'>
+		<AppBar position='sticky' sx={{ backgroundColor: 'primary.dark' }}>
 			<StyledToolBar>
 				<Typography variant='h6' sx={{ display: { xs: 'none', md: 'block' } }}>
 					My Blog
@@ -72,7 +69,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 					onClick={(e) => setOpenMainMenu(true)}
 					size='large'
 					edge='start'
-					color='inherit'
+					// color='inherit'
 					aria-label='menu'
 					sx={{ mr: 2, display: { xs: 'block', md: 'none' } }}
 				>
@@ -103,16 +100,22 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 							Profile
 						</MenuItem>
 					)}
-					<Tooltip title={mode === 'dark' ? 'Light mode' : 'Dark Mode'}>
-						<MenuItem>
-							<ListItemIcon>
-								<ModeNight fontSize='small' />
+					<MenuItem sx={{ paddingLeft: '8px' }}>
+						{/* <ListItemIcon>
+								{mode === 'dark' ? (
+									<Brightness7 fontSize='small' />
+								) : (
+									<Brightness4 fontSize='small' />
+								)}
 							</ListItemIcon>
 							<Switch
 								onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
-							/>
-						</MenuItem>
-					</Tooltip>
+							/> */}
+						<MaterialUISwitch
+							color='secondary'
+							onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')}
+						/>
+					</MenuItem>
 				</Menu>
 				{/* <Outlet /> */}
 				<Search>
@@ -158,7 +161,11 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 					horizontal: 'right',
 				}}
 			>
-				<MenuItem component={Link} to={'/profile'} color='inherit'>
+				<MenuItem
+					component={Link}
+					to={'/profile'}
+					// color='inherit'
+				>
 					Profile
 				</MenuItem>
 
