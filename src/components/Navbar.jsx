@@ -59,7 +59,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 	};
 
 	return (
-		<AppBar position='sticky' sx={{ backgroundColor: 'primary.dark' }}>
+		<AppBar position='sticky'>
 			<StyledToolBar>
 				<Typography variant='h6' sx={{ display: { xs: 'none', md: 'block' } }}>
 					My Blog

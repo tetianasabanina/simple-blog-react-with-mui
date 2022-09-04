@@ -21,9 +21,11 @@ const getDesignTokens = (mode) => ({
 		mode,
 		primary: {
 			...orange,
-			...(mode === 'dark' && {
-				main: '#000000',
-			}),
+			...(mode === 'dark'
+				? {
+						main: '#000000',
+				  }
+				: { main: orange[500] }),
 		},
 		secondary: {
 			...teal,
