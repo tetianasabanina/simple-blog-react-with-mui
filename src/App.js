@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Box, Stack, CssBaseline } from '@mui/material';
-import { orange, teal } from '@mui/material/colors';
+import { indigo, amber } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Add from './components/Add';
@@ -20,26 +20,26 @@ const getDesignTokens = (mode) => ({
 	palette: {
 		mode,
 		primary: {
-			...orange,
+			...indigo,
 			...(mode === 'dark'
 				? {
 						main: '#000000',
 				  }
-				: { main: orange[500] }),
+				: { main: indigo[900] }),
 		},
 		secondary: {
-			...teal,
+			...amber,
 			...(mode === 'dark'
 				? {
 						main: '#003892',
 				  }
-				: { main: teal[500] }),
+				: { main: amber[700] }),
 		},
 		...(mode === 'dark'
 			? {
 					background: {
 						default: '#121212',
-						paper: '#121212',
+						paper: '#9f9f9f',
 					},
 			  }
 			: {
@@ -65,8 +65,8 @@ const getDesignTokens = (mode) => ({
 	// 	...(mode === 'light'
 	// 		? {
 	// 				// palette values for light mode
-	// 				primary: orange[500],
-	// 				divider: orange[200],
+	// 				primary: indigo[500],
+	// 				divider: indigo[200],
 	// 				text: {
 	// 					primary: '#000000',
 	// 					secondary: '#fafafa',

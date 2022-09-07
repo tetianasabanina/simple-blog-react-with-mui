@@ -69,7 +69,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 					onClick={(e) => setOpenMainMenu(true)}
 					size='large'
 					edge='start'
-					// color='inherit'
+					color='inherit'
 					aria-label='menu'
 					sx={{ mr: 2, display: { xs: 'block', md: 'none' } }}
 				>
