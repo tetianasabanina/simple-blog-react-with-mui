@@ -5,6 +5,7 @@ import { FlutterDash } from '@mui/icons-material';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
+
 import {
 	AppBar,
 	InputBase,

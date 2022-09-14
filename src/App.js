@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import PrivateRoute from './pages/PrivateRoute';
 import ScrollToTop from './HOC/ScrollToTop';
+import { SettingsInputCompositeSharp } from '@mui/icons-material';
 
 const getDesignTokens = (mode) => ({
 	// console.log(mode)
@@ -67,16 +68,33 @@ function App() {
 	const lastId = Posts.sort((a, b) => {
 		return a.id - b.id;
 	})[Posts.length - 1].id;
+	const [posts, setPosts] = useState(Posts);
 	const [mode, setMode] = useState('light');
-	const [isLoggedIn, setLogged] = useState(true);
+	const [isLoggedIn, setLogged] = useState(false);
 	const setLoggedIn = () => setLogged(true);
 	const setLoggedOut = () => setLogged(false);
 	const [nextId, setNextId] = useState(lastId + 1);
 	const darkTheme = createTheme(getDesignTokens(mode));
 	const addPost = (post) => {
 		console.log(post);
-		Posts.push(post);
+		posts.push(post);
 		setNextId(nextId + 1);
+	};
+	const deletePost = (postId) => {
+		console.log('delete Id', postId);
+		const newPosts = posts.filter((post) => post.id !== postId);
+		console.log(newPosts);
+		setPosts(newPosts);
+	};
+
+	const editPost = (newPost) => {
+		console.log('edit', newPost);
+		const newPosts = posts.filter((post) => post.id !== newPost.id);
+		console.log(newPosts);
+		newPosts.push(newPost).sortt((a, b) => {
+			return a.id - b.id;
+		});
+		setPosts(newPosts);
 	};
 
 	return (
@@ -95,7 +113,17 @@ function App() {
 						<Sidebar setMode={setMode} mode={mode} isLoggedIn={isLoggedIn} />
 						<ScrollToTop />
 						<Routes>
-							<Route path='/' element={<Feed posts={Posts} />} />
+							<Route
+								path='/'
+								element={
+									<Feed
+										posts={posts}
+										deletePost={deletePost}
+										editPost={editPost}
+										isLoggedIn={isLoggedIn}
+									/>
+								}
+							/>
 							<Route path='/settings' element={<Settings />} />
 							<Route
 								path='/profile'
@@ -109,7 +137,9 @@ function App() {
 						</Routes>
 						<Rightbar />
 					</Stack>
-					<Add addPost={addPost} userName='John' avatar='J' id={nextId} />
+					{isLoggedIn && (
+						<Add addPost={addPost} userName='John' avatar='J' id={nextId} />
+					)}
 					<Footer />
 				</Box>
 			</ThemeProvider>
