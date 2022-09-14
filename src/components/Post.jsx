@@ -33,14 +33,16 @@ const Post = ({
 					</IconButton>
 				}
 				title={postTitle}
-				subheader={subheader}
+				subheader={subheader.toDateString()}
 			/>
-			<CardMedia
-				component='img'
-				height='20%'
-				image={postImage}
-				alt={altImageText}
-			/>
+			{postImage && (
+				<CardMedia
+					component='img'
+					height='20%'
+					image={postImage}
+					alt={altImageText}
+				/>
+			)}
 			<CardContent>
 				<Typography
 					sx={{

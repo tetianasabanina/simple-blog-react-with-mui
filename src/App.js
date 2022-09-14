@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Box, Stack, CssBaseline } from '@mui/material';
 import { indigo, amber } from '@mui/material/colors';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Posts from './data/Posts';
 
 import Add from './components/Add';
 import Feed from './pages/Feed';
@@ -60,69 +61,23 @@ const getDesignTokens = (mode) => ({
 				  }),
 		},
 	},
-	// palette: {
-	// 	mode,
-	// 	...(mode === 'light'
-	// 		? {
-	// 				// palette values for light mode
-	// 				primary: indigo[500],
-	// 				divider: indigo[200],
-	// 				text: {
-	// 					primary: '#000000',
-	// 					secondary: '#fafafa',
-	// 				},
-	// 				background: {
-	// 					default: '#f0f2f4',
-	// 					paper: '#cbcbcb',
-	// 				},
-	// 		  }
-	// 		: {
-	// 				// palette values for dark mode
-	// 				primary: '#000000',
-	// 				divider: 'rgba(255, 255, 255, 0.12)',
-	// 				background: {
-	// 					default: '#121212',
-	// 					paper: '#121212',
-	// 				},
-	// 				text: {
-	// 					primary: '#fff',
-	// 					secondary: '#fafafa',
-	// 				},
-	// 		  }),
-	// },
 });
 
 function App() {
+	const lastId = Posts.sort((a, b) => {
+		return a.id - b.id;
+	})[Posts.length - 1].id;
 	const [mode, setMode] = useState('light');
 	const [isLoggedIn, setLogged] = useState(true);
 	const setLoggedIn = () => setLogged(true);
 	const setLoggedOut = () => setLogged(false);
-
+	const [nextId, setNextId] = useState(lastId + 1);
 	const darkTheme = createTheme(getDesignTokens(mode));
-
-	// const darkTheme = createTheme({
-	// 	palette: {
-	// 		mode: mode,
-	// 		primary: {
-	// 			main: '#7986cb',
-	// 		},
-	// 		secondary: {
-	// 			main: '#af52d5',
-	// 		},
-	// 		primaryLight: {
-	// 			main: '#7986cb',
-	// 		},
-	// 		primaryDark: {
-	// 			main: '#26418f',
-	// 		},
-	// 		secondaryDark: {
-	// 			main: '#4a0073',
-	// 		},
-	// 		background: {
-	// 			default: '#f0f2f4',
-	// 		},
-	// 	},
-	// });
+	const addPost = (post) => {
+		console.log(post);
+		Posts.push(post);
+		setNextId(nextId + 1);
+	};
 
 	return (
 		<>
@@ -140,7 +95,7 @@ function App() {
 						<Sidebar setMode={setMode} mode={mode} isLoggedIn={isLoggedIn} />
 						<ScrollToTop />
 						<Routes>
-							<Route path='/' element={<Feed />} />
+							<Route path='/' element={<Feed posts={Posts} />} />
 							<Route path='/settings' element={<Settings />} />
 							<Route
 								path='/profile'
@@ -154,7 +109,7 @@ function App() {
 						</Routes>
 						<Rightbar />
 					</Stack>
-					<Add />
+					<Add addPost={addPost} userName='John' avatar='J' id={nextId} />
 					<Footer />
 				</Box>
 			</ThemeProvider>

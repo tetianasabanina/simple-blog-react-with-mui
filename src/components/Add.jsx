@@ -10,6 +10,7 @@ import {
 	TextField,
 	Tooltip,
 	Typography,
+	IconButton,
 } from '@mui/material';
 import {
 	Add as AddIcon,
@@ -18,6 +19,7 @@ import {
 	Image,
 	VideoCameraBack,
 	DateRange,
+	Close,
 } from '@mui/icons-material';
 import React, { useState } from 'react';
 
@@ -34,8 +36,45 @@ const UserBox = styled(Box)({
 	marginBottom: '20px',
 });
 
-const Add = () => {
+const HeaderBox = styled(Box)({
+	display: 'flex',
+	justifyContent: 'flex-end',
+});
+
+const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 	const [open, setOpen] = useState(false);
+	const [postText, setText] = React.useState('');
+	const [title, setTitle] = React.useState('');
+	const handleChangeText = (event) => {
+		setText(event.target.value);
+	};
+	const handleChangeTitle = (event) => {
+		setTitle(event.target.value);
+	};
+	const closeModal = () => {
+		setText('');
+		setTitle('');
+		setOpen(false);
+	};
+	const createPost = () => {
+		const image = '';
+		const alt = title;
+		const text = postText;
+		const date = new Date();
+		const newPost = {
+			id,
+			image,
+			alt,
+			title,
+			avatar,
+			userName,
+			text,
+			date,
+		};
+		addPost(newPost);
+		closeModal();
+	};
+
 	return (
 		<>
 			<Tooltip
@@ -55,34 +94,58 @@ const Add = () => {
 			</Tooltip>
 			<StyledModal
 				open={open}
-				onClose={(e) => setOpen(false)}
+				onClose={(e) => closeModal()}
 				aria-labelledby='modal-modal-title'
 				aria-describedby='modal-modal-description'
 			>
 				<Box
+					component='form'
 					width={400}
-					height={280}
+					height={320}
 					bgcolor={'background.paper'}
 					color={'text.primary'}
 					borderRadius={5}
-					padding={3}
+					padding={1}
 				>
-					<Typography variant='h6' color='gray' textAlign='center'>
-						Create post
-					</Typography>
+					<HeaderBox>
+						<IconButton
+							onClick={(e) => {
+								closeModal();
+							}}
+							aria-label='close the modal window'
+						>
+							<Close />
+						</IconButton>
+					</HeaderBox>
+
 					<UserBox>
 						<Avatar src='' sx={{ width: 30, height: 30 }} />
 						<Typography fontWeight={500} variant='span'>
-							John
+							{userName}
 						</Typography>
 					</UserBox>
+					<UserBox>
+						<Typography fontWeight={400} variant='span'>
+							Title:
+						</Typography>
+						<TextField
+							// sx={{ width: '100%' }}
+							id='standard-multiline-static'
+							variant='standard'
+							value={title}
+							onChange={handleChangeTitle}
+						/>
+					</UserBox>
+
 					<TextField
 						sx={{ width: '100%' }}
-						id='standard-multiline-static'
+						id='post-text'
 						multiline
 						rows={3}
 						placeholder="What's on your mind?"
 						variant='standard'
+						value={postText}
+						onChange={handleChangeText}
 					/>
 					<Stack direction='row' gap={1} mt={2} mb={3}>
 						<EmojiEmotions color='primary' />
@@ -95,7 +158,7 @@ const Add = () => {
 						variant='contained'
 						aria-label='outlined primary button group'
 					>
-						<Button>Post</Button>
+						<Button onClick={createPost}>Post</Button>
 						<Button sx={{ width: 100 }}>
 							<DateRange />
 						</Button>
