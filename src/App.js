@@ -80,13 +80,13 @@ function App() {
 			return b.createdAt - a.createdAt;
 		});
 		setPosts(sortedPosts);
-		console.log('UseEffect2, ', nextId, Posts);
 	}, []);
 	const addPost = (post) => {
 		console.log(post);
-		posts.push(post);
+		posts.unshift(post);
 		console.log(Posts);
 		setNextId(nextId + 1);
+		window.scrollTo(0, 0);
 	};
 
 	const deletePost = (postId) => {
@@ -99,8 +99,9 @@ function App() {
 	const editPost = (newPost) => {
 		console.log('edit', newPost);
 		const newPosts = posts.filter((post) => post.id !== newPost.id);
-		newPosts.push(newPost);
+		newPosts.unshift(newPost);
 		setPosts(newPosts);
+		window.scrollTo(0, 0);
 	};
 
 	return (

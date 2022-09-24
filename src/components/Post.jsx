@@ -49,6 +49,13 @@ const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
 		setOpenEdit(false);
 	};
 
+	const createSubheader = () => {
+		const subhider = !post.modifiedAt
+			? `${post.createdAt.toDateString()} - ${post.createdAt.toLocaleTimeString()}`
+			: `${post.modifiedAt.toDateString()} - ${post.modifiedAt.toLocaleTimeString()} (edited)`;
+		return subhider;
+	};
+
 	return (
 		<Fragment>
 			<Card sx={{ margin: 5 }}>
@@ -74,7 +81,9 @@ const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
 						)
 					}
 					title={post.title}
-					subheader={post.createdAt.toDateString()}
+					subheader={createSubheader()}
+					// subheaderTypographyProps={{ whiteSpace: 'pre' }}
+					titleTypographyProps={{ fontWeight: 600, fontSize: '1rem' }}
 				/>
 				{post.image && (
 					<CardMedia
