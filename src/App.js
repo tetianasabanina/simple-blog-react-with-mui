@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Box, Stack, CssBaseline } from '@mui/material';
 import { indigo, amber } from '@mui/material/colors';
@@ -75,6 +75,13 @@ function App() {
 	const [nextId, setNextId] = useState(lastId + 1);
 	const darkTheme = createTheme(getDesignTokens(mode));
 
+	useEffect(() => {
+		const sortedPosts = Posts.slice().sort((a, b) => {
+			return b.createdAt - a.createdAt;
+		});
+		setPosts(sortedPosts);
+		console.log('UseEffect2, ', nextId, Posts);
+	}, []);
 	const addPost = (post) => {
 		console.log(post);
 		posts.push(post);

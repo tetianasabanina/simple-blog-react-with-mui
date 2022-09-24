@@ -60,7 +60,7 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 		const image = '';
 		const alt = title;
 		const text = postText;
-		const date = new Date();
+		const createdAt = new Date();
 		const newPost = {
 			id,
 			image,
@@ -69,7 +69,7 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 			avatar,
 			userName,
 			text,
-			date,
+			createdAt,
 		};
 		addPost(newPost);
 		closeModal();

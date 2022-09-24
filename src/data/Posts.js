@@ -12,7 +12,7 @@ const Posts = [
 		avatar: 'A',
 		userName: 'Anna',
 		text: loremIpsum,
-		date: new Date(2022, 8, 8),
+		createdAt: new Date(2022, 8, 8),
 	},
 	{
 		id: 2,
@@ -22,7 +22,7 @@ const Posts = [
 		userName: 'Bella',
 		avatar: 'B',
 		text: loremIpsum,
-		date: new Date(2022, 8, 20),
+		createdAt: new Date(2022, 8, 20),
 	},
 ];
 

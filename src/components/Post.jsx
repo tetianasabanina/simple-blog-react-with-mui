@@ -74,7 +74,7 @@ const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
 						)
 					}
 					title={post.title}
-					subheader={post.date.toDateString()}
+					subheader={post.createdAt.toDateString()}
 				/>
 				{post.image && (
 					<CardMedia

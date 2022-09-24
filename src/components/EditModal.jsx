@@ -56,13 +56,13 @@ const EditModal = ({ editPost, post, isModalOpen, onCloseModal }) => {
 	const modifyPost = () => {
 		const alt = title;
 		const text = postText;
-		const modified = new Date();
+		const modifiedAt = new Date();
 		const newPost = {
 			...post,
 			alt,
 			title,
 			text,
-			modified,
+			modifiedAt,
 		};
 		editPost(newPost);
 		closeModal();
