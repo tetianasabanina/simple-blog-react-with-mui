@@ -15,7 +15,6 @@ import Settings from './pages/Settings';
 import Profile from './pages/Profile';
 import PrivateRoute from './pages/PrivateRoute';
 import ScrollToTop from './HOC/ScrollToTop';
-import { SettingsInputCompositeSharp } from '@mui/icons-material';
 
 const getDesignTokens = (mode) => ({
 	// console.log(mode)
@@ -75,11 +74,14 @@ function App() {
 	const setLoggedOut = () => setLogged(false);
 	const [nextId, setNextId] = useState(lastId + 1);
 	const darkTheme = createTheme(getDesignTokens(mode));
+
 	const addPost = (post) => {
 		console.log(post);
 		posts.push(post);
+		console.log(Posts);
 		setNextId(nextId + 1);
 	};
+
 	const deletePost = (postId) => {
 		console.log('delete Id', postId);
 		const newPosts = posts.filter((post) => post.id !== postId);
@@ -90,10 +92,7 @@ function App() {
 	const editPost = (newPost) => {
 		console.log('edit', newPost);
 		const newPosts = posts.filter((post) => post.id !== newPost.id);
-		console.log(newPosts);
-		newPosts.push(newPost).sortt((a, b) => {
-			return a.id - b.id;
-		});
+		newPosts.push(newPost);
 		setPosts(newPosts);
 	};
 

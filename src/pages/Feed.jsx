@@ -1,25 +1,23 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import Post from '../components/Post';
 
 const Feed = ({ posts, deletePost, editPost, isLoggedIn }) => {
 	return (
 		<Box flex={4} p={2}>
-			{posts.map((post) => (
-				<Post
-					key={post.id}
-					postId={post.id}
-					postImage={post.image}
-					altImageText={post.title}
-					postTitle={post.title}
-					postAvatar={post.avatar}
-					postText={post.text}
-					subheader={post.date}
-					deletePost={deletePost}
-					editPost={editPost}
-					isLoggedIn={isLoggedIn}
-				/>
-			))}
+			{posts.length > 0 ? (
+				posts.map((post) => (
+					<Post
+						key={post.id}
+						post={post}
+						deletePost={deletePost}
+						editPost={editPost}
+						isLoggedIn={isLoggedIn}
+					/>
+				))
+			) : (
+				<Typography>There is no posts. Create one...</Typography>
+			)}
 		</Box>
 	);
 };

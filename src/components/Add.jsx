@@ -95,8 +95,8 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 			<StyledModal
 				open={open}
 				onClose={(e) => closeModal()}
-				aria-labelledby='modal-modal-title'
-				aria-describedby='modal-modal-description'
+				aria-labelledby='add-edit-modal-title'
+				aria-describedby='add-edit-modal-description'
 			>
 				<Box
 					component='form'

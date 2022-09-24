@@ -10,6 +10,7 @@ const Posts = [
 		alt: 'peippo',
 		title: 'Peippo',
 		avatar: 'A',
+		userName: 'Anna',
 		text: loremIpsum,
 		date: new Date(2022, 8, 8),
 	},
@@ -18,9 +19,10 @@ const Posts = [
 		image: image2,
 		alt: 'crocus',
 		title: 'Crocus',
+		userName: 'Bella',
 		avatar: 'B',
 		text: loremIpsum,
-		date: new Date(2022, 8, 8),
+		date: new Date(2022, 8, 20),
 	},
 ];
 

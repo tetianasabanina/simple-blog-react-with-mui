@@ -13,27 +13,15 @@ import {
 	MenuItem,
 } from '@mui/material';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
-// import IconButton from '@mui/joy/IconButton';
-// import Menu from '@mui/joy/Menu';
-// import MenuItem from '@mui/joy/MenuItem';
 import { MoreVert, Favorite, Share, FavoriteBorder } from '@mui/icons-material';
 import Edit from '@mui/icons-material/Edit';
 import DeleteForever from '@mui/icons-material/DeleteForever';
+import EditModal from './EditModal';
 
-const Post = ({
-	postImage,
-	altImageText,
-	postTitle,
-	postAvatar,
-	postText,
-	subheader,
-	postId,
-	deletePost,
-	editPost,
-	isLoggedIn,
-}) => {
+const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
+	const [openEditModal, setOpenEdit] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
-	const open = Boolean(anchorEl);
+	const openMenu = Boolean(anchorEl);
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
@@ -42,17 +30,23 @@ const Post = ({
 	};
 
 	const onDeletePost = () => {
-		deletePost(postId);
+		deletePost(post.id);
 		handleClose();
 	};
 
-	const onEditPost = () => {
-		console.log('EditPost', postId);
+	const onToggleEdit = () => {
+		console.log('EditModal', post.id);
+		setOpenEdit(true);
 		// const post = {
 
 		// }
 		// editPost(post);
 		handleClose();
+	};
+
+	const onCloseEditModal = () => {
+		console.log('closeEditModal');
+		setOpenEdit(false);
 	};
 
 	return (
@@ -61,7 +55,7 @@ const Post = ({
 				<CardHeader
 					avatar={
 						<Avatar sx={{ bgcolor: 'red' }} aria-label='about'>
-							{postAvatar}
+							{post.avatar}
 						</Avatar>
 					}
 					action={
@@ -69,9 +63,9 @@ const Post = ({
 							<IconButton
 								aria-label='actions'
 								id='actions-button'
-								aria-controls={open ? 'actions' : undefined}
+								aria-controls={openMenu ? 'actions' : undefined}
 								aria-haspopup='true'
-								aria-expanded={open ? 'true' : undefined}
+								aria-expanded={openMenu ? 'true' : undefined}
 								variant='outlined'
 								onClick={handleClick}
 							>
@@ -79,15 +73,15 @@ const Post = ({
 							</IconButton>
 						)
 					}
-					title={postTitle}
-					subheader={subheader.toDateString()}
+					title={post.title}
+					subheader={post.date.toDateString()}
 				/>
-				{postImage && (
+				{post.image && (
 					<CardMedia
 						component='img'
 						height='20%'
-						image={postImage}
-						alt={altImageText}
+						image={post.image}
+						alt={post.alt}
 					/>
 				)}
 				<CardContent>
@@ -103,7 +97,7 @@ const Post = ({
 						color='text.secondary'
 					>
 						{' '}
-						{postText}
+						{post.text}
 					</Typography>
 				</CardContent>
 				<CardActions disableSpacing>
@@ -122,11 +116,11 @@ const Post = ({
 				id='actions'
 				aria-labelledby='actions-button'
 				anchorEl={anchorEl}
-				open={open}
+				open={openMenu}
 				onClose={handleClose}
 				placement='bottom-end'
 			>
-				<MenuItem onClick={onEditPost}>
+				<MenuItem onClick={onToggleEdit}>
 					<ListItemDecorator>
 						<Edit />
 					</ListItemDecorator>{' '}
@@ -139,6 +133,14 @@ const Post = ({
 					Delete
 				</MenuItem>
 			</Menu>
+			{openEditModal && (
+				<EditModal
+					post={post}
+					editPost={editPost}
+					isModalOpen={openEditModal}
+					onCloseModal={onCloseEditModal}
+				/>
+			)}
 		</Fragment>
 	);
 };
