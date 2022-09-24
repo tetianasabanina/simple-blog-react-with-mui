@@ -78,8 +78,16 @@ const EditModal = ({ editPost, post, isModalOpen, onCloseModal }) => {
 		>
 			<Box
 				component='form'
-				width={400}
-				height={320}
+				sx={{
+					height: '320px',
+					width: {
+						xs: 400,
+						sm: 500,
+						md: 600,
+						lg: 700,
+						xl: 900,
+					},
+				}}
 				bgcolor={'background.paper'}
 				color={'text.primary'}
 				borderRadius={5}
@@ -107,6 +115,7 @@ const EditModal = ({ editPost, post, isModalOpen, onCloseModal }) => {
 						Title:
 					</Typography>
 					<TextField
+						fullWidth
 						// sx={{ width: '100%' }}
 						id='standard-multiline-static'
 						variant='standard'
