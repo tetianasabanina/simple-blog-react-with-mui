@@ -100,12 +100,20 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 			>
 				<Box
 					component='form'
-					width={400}
-					height={320}
+					sx={{
+						height: '320px',
+						width: {
+							xs: 400,
+							sm: 500,
+							md: 600,
+							lg: 700,
+							xl: 900,
+						},
+					}}
 					bgcolor={'background.paper'}
 					color={'text.primary'}
 					borderRadius={5}
-					padding={1}
+					padding={2}
 				>
 					<HeaderBox>
 						<IconButton
@@ -130,6 +138,7 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 						</Typography>
 						<TextField
 							// sx={{ width: '100%' }}
+							fullWidth
 							id='standard-multiline-static'
 							variant='standard'
 							value={title}
