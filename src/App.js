@@ -76,7 +76,8 @@ function App() {
 	const darkTheme = createTheme(getDesignTokens(mode));
 
 	useEffect(() => {
-		const sortedPosts = Posts.slice().sort((a, b) => {
+		const filteredPosts = Posts.filter((post) => !post.archivedAt);
+		const sortedPosts = filteredPosts.slice().sort((a, b) => {
 			return b.createdAt - a.createdAt;
 		});
 		setPosts(sortedPosts);
@@ -89,15 +90,12 @@ function App() {
 		window.scrollTo(0, 0);
 	};
 
-	const deletePost = (postId) => {
-		console.log('delete Id', postId);
-		const newPosts = posts.filter((post) => post.id !== postId);
-		console.log(newPosts);
+	const deletePost = (newPost) => {
+		const newPosts = posts.filter((post) => post.id !== newPost.id);
 		setPosts(newPosts);
 	};
 
 	const editPost = (newPost) => {
-		console.log('edit', newPost);
 		const newPosts = posts.filter((post) => post.id !== newPost.id);
 		newPosts.unshift(newPost);
 		setPosts(newPosts);

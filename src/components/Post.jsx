@@ -30,17 +30,18 @@ const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
 	};
 
 	const onDeletePost = () => {
-		deletePost(post.id);
+		const archivedAt = new Date();
+		const newPost = {
+			...post,
+			archivedAt,
+		};
+		deletePost(newPost);
 		handleClose();
 	};
 
 	const onToggleEdit = () => {
-		console.log('EditModal', post.id);
+		// console.log('EditModal', post.id);
 		setOpenEdit(true);
-		// const post = {
-
-		// }
-		// editPost(post);
 		handleClose();
 	};
 
