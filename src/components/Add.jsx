@@ -42,17 +42,25 @@ const HeaderBox = styled(Box)({
 });
 
 const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
+	const textObject = {
+		default: '',
+		english: '',
+		finnish: '',
+	};
 	const [open, setOpen] = useState(false);
-	const [postText, setText] = React.useState('');
-	const [title, setTitle] = React.useState('');
+	const [postText, setText] = useState(textObject);
+	const [title, setTitle] = useState('');
+
 	const handleChangeText = (event) => {
-		setText(event.target.value);
+		const defaultText = event.target.value;
+		const text = { ...postText, default: defaultText };
+		setText(text);
 	};
 	const handleChangeTitle = (event) => {
 		setTitle(event.target.value);
 	};
 	const closeModal = () => {
-		setText('');
+		setText(textObject);
 		setTitle('');
 		setOpen(false);
 	};
@@ -153,7 +161,7 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 						rows={3}
 						placeholder="What's on your mind?"
 						variant='standard'
-						value={postText}
+						value={postText.default}
 						onChange={handleChangeText}
 					/>
 					<Stack direction='row' gap={1} mt={2} mb={3}>

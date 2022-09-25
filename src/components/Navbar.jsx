@@ -19,6 +19,8 @@ import {
 	MenuItem,
 	IconButton,
 	Button,
+	FormControl,
+	Select,
 } from '@mui/material';
 
 const StyledToolBar = styled(Toolbar)({
@@ -51,12 +53,54 @@ const Icons = styled(Box)(({ theme }) => ({
 	},
 }));
 
+const StyledInput = styled(InputBase)(({ theme }) => ({
+	'label + &': {
+		marginTop: theme.spacing(3),
+	},
+	'& .MuiInputBase-input': {
+		// borderRadius: 4,
+		position: 'relative',
+		// backgroundColor: theme.palette.background.paper,
+		color: 'white',
+		// border: '1px solid #ced4da',
+		fontSize: 16,
+		padding: '6px 26px 8px 6px',
+		transition: theme.transitions.create(['border-color', 'box-shadow']),
+		// Use the system font instead of the default Roboto font.
+		fontFamily: [
+			'-apple-system',
+			'BlinkMacSystemFont',
+			'"Segoe UI"',
+			'Roboto',
+			'"Helvetica Neue"',
+			'Arial',
+			'sans-serif',
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"',
+		].join(','),
+		'&:focus': {
+			borderRadius: 4,
+			borderColor: '#80bdff',
+			boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+		},
+	},
+	'.MuiSelect-icon': {
+		color: 'white',
+	},
+}));
+
 const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 	const [openUserMenu, setOpenUserMenu] = useState(false);
 	const [openMainMenu, setOpenMainMenu] = useState(false);
+	const [languageSelected, setLanguage] = useState('en');
 	const logout = () => {
 		setLoggedOut();
 		setOpenUserMenu(false);
+	};
+
+	const handleLanguageChange = (event) => {
+		setLanguage(event.target.value);
 	};
 
 	return (
@@ -122,6 +166,22 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 				<Search>
 					<InputBase placeholder='search...' />
 				</Search>
+
+				<FormControl sx={{ m: 1, minWidth: 80 }} size='small'>
+					<Select
+						labelId='language-select-label'
+						id='language-select'
+						value={languageSelected}
+						// label='Language'
+						displayEmpty
+						onChange={handleLanguageChange}
+						autoWidth
+						input={<StyledInput />}
+					>
+						<MenuItem value={'en'}>En</MenuItem>
+						<MenuItem value={'fi'}>Fi</MenuItem>
+					</Select>
+				</FormControl>
 				{isLoggedIn ? (
 					<>
 						<Icons>

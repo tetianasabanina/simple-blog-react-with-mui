@@ -107,7 +107,7 @@ const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
 						color='text.secondary'
 					>
 						{' '}
-						{post.text}
+						{post.text.default}
 					</Typography>
 				</CardContent>
 				<CardActions disableSpacing>

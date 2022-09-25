@@ -40,10 +40,12 @@ const HeaderBox = styled(Box)({
 
 const EditModal = ({ editPost, post, isModalOpen, onCloseModal }) => {
 	const [open, setOpen] = useState(isModalOpen);
-	const [postText, setText] = React.useState(post.text);
-	const [title, setTitle] = React.useState(post.title);
+	const [postText, setText] = useState(post.text);
+	const [title, setTitle] = useState(post.title);
 	const handleChangeText = (event) => {
-		setText(event.target.value);
+		const defaultText = event.target.value;
+		const text = { ...postText, default: defaultText };
+		setText(text);
 	};
 	const handleChangeTitle = (event) => {
 		setTitle(event.target.value);
@@ -131,7 +133,7 @@ const EditModal = ({ editPost, post, isModalOpen, onCloseModal }) => {
 					rows={3}
 					placeholder="What's on your mind?"
 					variant='standard'
-					value={postText}
+					value={postText.default}
 					onChange={handleChangeText}
 				/>
 				<Stack direction='row' gap={1} mt={2} mb={3}>
