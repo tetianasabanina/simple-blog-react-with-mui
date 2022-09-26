@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import MaterialUISwitch from './MaterialUiSwitch';
 import { FlutterDash } from '@mui/icons-material';
@@ -22,6 +22,7 @@ import {
 	FormControl,
 	Select,
 } from '@mui/material';
+import { LanguageContext } from '../App';
 
 const StyledToolBar = styled(Toolbar)({
 	display: 'flex',
@@ -90,10 +91,17 @@ const StyledInput = styled(InputBase)(({ theme }) => ({
 	},
 }));
 
-const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
+const Navbar = ({
+	mode,
+	setMode,
+	isLoggedIn,
+	setLoggedOut,
+	setLoggedIn,
+	setLanguage,
+}) => {
 	const [openUserMenu, setOpenUserMenu] = useState(false);
 	const [openMainMenu, setOpenMainMenu] = useState(false);
-	const [languageSelected, setLanguage] = useState('en');
+	const language = useContext(LanguageContext);
 	const logout = () => {
 		setLoggedOut();
 		setOpenUserMenu(false);
@@ -171,7 +179,7 @@ const Navbar = ({ mode, setMode, isLoggedIn, setLoggedOut, setLoggedIn }) => {
 					<Select
 						labelId='language-select-label'
 						id='language-select'
-						value={languageSelected}
+						value={language}
 						// label='Language'
 						displayEmpty
 						onChange={handleLanguageChange}

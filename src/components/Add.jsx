@@ -20,8 +20,10 @@ import {
 	VideoCameraBack,
 	DateRange,
 	Close,
+	AddCircleOutline,
 } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { LanguageContext } from '../App';
 
 const StyledModal = styled(Modal)({
 	display: 'flex',
@@ -42,6 +44,10 @@ const HeaderBox = styled(Box)({
 });
 
 const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
+	const language = useContext(LanguageContext);
+	const anotherLanguage = language === 'en' ? 'FI' : 'EN';
+	const [textInSelectedLanguage, setTextInSelectedLanguage] = useState('');
+	const [textInSecondLanguage, setTextInSecondLanguage] = useState('');
 	const textObject = {
 		default: '',
 		english: '',
@@ -50,24 +56,64 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 	const [open, setOpen] = useState(false);
 	const [postText, setText] = useState(textObject);
 	const [title, setTitle] = useState('');
+	const [isAnotherLanguage, setAnotherLanguage] = useState(false);
 
 	const handleChangeText = (event) => {
-		const defaultText = event.target.value;
-		const text = { ...postText, default: defaultText };
-		setText(text);
+		const currentText = event.target.value;
+		setTextInSelectedLanguage(currentText);
 	};
+
+	const handleChangeTextSecond = (event) => {
+		const currentText = event.target.value;
+		setTextInSecondLanguage(currentText);
+	};
+
 	const handleChangeTitle = (event) => {
 		setTitle(event.target.value);
+	};
+
+	const onAddLanguage = () => {
+		setAnotherLanguage(true);
+		setHeight('400px');
 	};
 	const closeModal = () => {
 		setText(textObject);
 		setTitle('');
 		setOpen(false);
+		setTextInSelectedLanguage('');
+		setAnotherLanguage(false);
+		setHeight('320px');
 	};
+
+	const createTextObject = () => {
+		let textObject = '';
+		switch (language) {
+			case 'en':
+				textObject = {
+					...postText,
+					english: textInSelectedLanguage,
+					finnish: textInSecondLanguage,
+					default: textInSelectedLanguage,
+				};
+				break;
+			case 'fi':
+				textObject = {
+					...postText,
+					english: textInSecondLanguage,
+					finnish: textInSelectedLanguage,
+					default: textInSelectedLanguage,
+				};
+				break;
+			default:
+				textObject = { ...postText, default: textInSelectedLanguage };
+		}
+		return textObject;
+	};
+
 	const createPost = () => {
 		const image = '';
 		const alt = title;
-		const text = postText;
+		const text = createTextObject();
 		const createdAt = new Date();
 		const newPost = {
 			id,
@@ -82,6 +128,7 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 		addPost(newPost);
 		closeModal();
 	};
+	const [boxHeight, setHeight] = useState('320px');
 
 	return (
 		<>
@@ -109,7 +156,7 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 				<Box
 					component='form'
 					sx={{
-						height: '320px',
+						height: boxHeight,
 						width: {
 							xs: 400,
 							sm: 500,
@@ -161,9 +208,28 @@ const Add = ({ addPost, userName = 'John Dow', avatar, id = 100 }) => {
 						rows={3}
 						placeholder="What's on your mind?"
 						variant='standard'
-						value={postText.default}
+						value={textInSelectedLanguage}
 						onChange={handleChangeText}
 					/>
+					{isAnotherLanguage ? (
+						<TextField
+							sx={{ width: '100%' }}
+							id='post-text-second'
+							multiline
+							rows={3}
+							placeholder={`Add text in another language (${anotherLanguage})`}
+							variant='standard'
+							value={textInSecondLanguage}
+							onChange={handleChangeTextSecond}
+						/>
+					) : (
+						<>
+							<span>{anotherLanguage}</span>
+							<IconButton color='primary' onClick={onAddLanguage}>
+								<AddCircleOutline />
+							</IconButton>
+						</>
+					)}
 					<Stack direction='row' gap={1} mt={2} mb={3}>
 						<EmojiEmotions color='primary' />
 						<Image color='secondary' />

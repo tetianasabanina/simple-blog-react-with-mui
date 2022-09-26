@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import {
 	Avatar,
 	Card,
@@ -17,8 +17,27 @@ import { MoreVert, Favorite, Share, FavoriteBorder } from '@mui/icons-material';
 import Edit from '@mui/icons-material/Edit';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import EditModal from './EditModal';
+import { LanguageContext } from '../App';
 
 const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
+	const language = useContext(LanguageContext);
+
+	const selectText = () => {
+		let text = '';
+		switch (language) {
+			case 'en':
+				text = post.text.english;
+				break;
+			case 'fi':
+				text = post.text.finnish;
+				break;
+			default:
+				text = post.text.default;
+		}
+		if (!text) text = post.text.default;
+		return text;
+	};
+
 	const [openEditModal, setOpenEdit] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const openMenu = Boolean(anchorEl);
@@ -107,7 +126,7 @@ const Post = ({ post, deletePost, editPost, isLoggedIn }) => {
 						color='text.secondary'
 					>
 						{' '}
-						{post.text.default}
+						{selectText()}
 					</Typography>
 				</CardContent>
 				<CardActions disableSpacing>

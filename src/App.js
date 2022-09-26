@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Box, Stack, CssBaseline } from '@mui/material';
 import { indigo, amber } from '@mui/material/colors';
@@ -63,10 +63,13 @@ const getDesignTokens = (mode) => ({
 	},
 });
 
+export const LanguageContext = createContext();
+
 function App() {
 	const lastId = Posts.sort((a, b) => {
 		return a.id - b.id;
 	})[Posts.length - 1].id;
+	const [language, setLanguage] = useState('en');
 	const [posts, setPosts] = useState(Posts);
 	const [mode, setMode] = useState('light');
 	const [isLoggedIn, setLogged] = useState(false);
@@ -106,47 +109,50 @@ function App() {
 		<>
 			<ThemeProvider theme={darkTheme}>
 				<CssBaseline enableColorScheme />
-				<Box bgcolor={'background.default'} color={'text.primary'}>
-					<Navbar
-						setMode={setMode}
-						mode={mode}
-						isLoggedIn={isLoggedIn}
-						setLoggedOut={setLoggedOut}
-						setLoggedIn={setLoggedIn}
-					/>
-					<Stack direction='row' spacing={2} justifyContent='space-between'>
-						<Sidebar setMode={setMode} mode={mode} isLoggedIn={isLoggedIn} />
-						<ScrollToTop />
-						<Routes>
-							<Route
-								path='/'
-								element={
-									<Feed
-										posts={posts}
-										deletePost={deletePost}
-										editPost={editPost}
-										isLoggedIn={isLoggedIn}
-									/>
-								}
-							/>
-							<Route path='/settings' element={<Settings />} />
-							<Route
-								path='/profile'
-								element={
-									<PrivateRoute isLoggedIn={isLoggedIn}>
-										<Profile />
-									</PrivateRoute>
-								}
-							/>
-							<Route path='*' element={'404 page not found'} />
-						</Routes>
-						<Rightbar />
-					</Stack>
-					{isLoggedIn && (
-						<Add addPost={addPost} userName='John' avatar='J' id={nextId} />
-					)}
-					<Footer />
-				</Box>
+				<LanguageContext.Provider value={language}>
+					<Box bgcolor={'background.default'} color={'text.primary'}>
+						<Navbar
+							setMode={setMode}
+							mode={mode}
+							isLoggedIn={isLoggedIn}
+							setLoggedOut={setLoggedOut}
+							setLoggedIn={setLoggedIn}
+							setLanguage={setLanguage}
+						/>
+						<Stack direction='row' spacing={2} justifyContent='space-between'>
+							<Sidebar setMode={setMode} mode={mode} isLoggedIn={isLoggedIn} />
+							<ScrollToTop />
+							<Routes>
+								<Route
+									path='/'
+									element={
+										<Feed
+											posts={posts}
+											deletePost={deletePost}
+											editPost={editPost}
+											isLoggedIn={isLoggedIn}
+										/>
+									}
+								/>
+								<Route path='/settings' element={<Settings />} />
+								<Route
+									path='/profile'
+									element={
+										<PrivateRoute isLoggedIn={isLoggedIn}>
+											<Profile />
+										</PrivateRoute>
+									}
+								/>
+								<Route path='*' element={'404 page not found'} />
+							</Routes>
+							<Rightbar />
+						</Stack>
+						{isLoggedIn && (
+							<Add addPost={addPost} userName='John' avatar='J' id={nextId} />
+						)}
+						<Footer />
+					</Box>
+				</LanguageContext.Provider>
 			</ThemeProvider>
 		</>
 	);
